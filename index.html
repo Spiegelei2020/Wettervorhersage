@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wettervorhersage</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div id="temperature"></div>
+      <div id="city"></div>
+      <label for="date">Zeigt das Wetter für den ausgewählten Tag:</label>
+      <input type="date" name="date" id="date" />
+      <button type="button" onclick="getDailyWeather()">Anzeigen</button>
+      <div id="weatherToday"></div>
+      <button
+        type="button"
+        id="addCity"
+        onclick="saveCity(); getTemperature();"
+      >
+        Stadt hinzufügen
+      </button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
