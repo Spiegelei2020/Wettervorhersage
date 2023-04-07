@@ -23,6 +23,10 @@ function getTemperature() {
       temperature.innerHTML = Math.round(data.main.temp) + '°';
       var city = document.getElementById('city');
       city.innerHTML = citySaved;
+      var icon = document.getElementById('icon');
+      var iconCode = data.weather[0].icon;
+      var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
+      icon.src = iconUrl;
     })
     .catch((error) => {
       console.log(error);
@@ -63,8 +67,7 @@ function getDailyWeather() {
 
       var weatherTemp = document.createElement('div');
       weatherTemp.classList.add('weatherTemp');
-      weatherTemp.innerHTML =
-        Math.round(data.list[0].main.temp) + '°';
+      weatherTemp.innerHTML = Math.round(data.list[0].main.temp) + '°';
       weatherItem.appendChild(weatherTemp);
 
       weatherToday.appendChild(weatherItem);
