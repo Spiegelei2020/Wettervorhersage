@@ -1,4 +1,5 @@
 const key = '8ea013b4d54c3cb5087d20ca02003bb5';
+const iconBaseUrl = 'https://openweathermap.org/img/wn/';
 
 function saveCity() {
   var city = prompt(
@@ -23,9 +24,10 @@ function getTemperature() {
       temperature.innerHTML = Math.round(data.main.temp) + '°';
       var city = document.getElementById('city');
       city.innerHTML = citySaved;
-      var icon = document.getElementById('icon');
+
       var iconCode = data.weather[0].icon;
-      var iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
+      var iconUrl = iconBaseUrl + iconCode + '@2x.png';
+      var icon = document.getElementById('icon');
       icon.src = iconUrl;
     })
     .catch((error) => {
@@ -43,7 +45,6 @@ function getDailyWeather() {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       var weatherToday = document.getElementById('weatherToday');
       weatherToday.innerHTML = '';
 
@@ -60,6 +61,13 @@ function getDailyWeather() {
       });
       weatherItem.appendChild(weatherDate);
 
+      var iconCode = data.list[0].weather[0].icon;
+      var iconUrl = iconBaseUrl + iconCode + '@2x.png';
+      var weatherIcon = document.createElement('img');
+      weatherIcon.src = iconUrl;
+      weatherIcon.alt = data.list[0].weather[0].description;
+      weatherItem.appendChild(weatherIcon);
+
       var weatherDescription = document.createElement('div');
       weatherDescription.classList.add('weatherDescription');
       weatherDescription.innerHTML = data.list[0].weather[0].description;
@@ -67,7 +75,8 @@ function getDailyWeather() {
 
       var weatherTemp = document.createElement('div');
       weatherTemp.classList.add('weatherTemp');
-      weatherTemp.innerHTML = Math.round(data.list[0].main.temp) + '°';
+      weatherTemp.innerHTML =
+        Math.round(data.list[0].main.temp) + '°';
       weatherItem.appendChild(weatherTemp);
 
       weatherToday.appendChild(weatherItem);
